@@ -5,24 +5,7 @@ import Table from "./Table";
 
 
 function MyApp() {
-  const [characters, setCharacters] = useState([
-    {
-      name: "Charlie",
-      job: "Janitor"
-    },
-    {
-      name: "Mac",
-      job: "Bouncer"
-    },
-    {
-      name: "Dee",
-      job: "Aspring actress"
-    },
-    {
-      name: "Dennis",
-      job: "Bartender"
-    }
-  ]);  
+  const [characters, setCharacters] = useState([]);  
   function removeOneCharacter(index) {
     const updated = characters.filter((character, i) => {
       return i !== index;
@@ -31,10 +14,11 @@ function MyApp() {
   }
   return (
     <div className="container">
-      <Table
-        characterData={characters}
-        removerCharacter={removeOneCharacter}
+      <Table 
+        characterData={characters} 
+        removerCharacter={removeOneCharacter} 
       />
+      <Form />
     </div>
   );
 }
