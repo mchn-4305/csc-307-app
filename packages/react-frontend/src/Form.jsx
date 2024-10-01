@@ -1,7 +1,7 @@
 // src/Form.jsx
 import React, {useState} from "react";
 
-function Form() {
+function Form(props) {
     const [person, setPerson] = useState({
         name: "",
         job: ""
@@ -10,7 +10,7 @@ function Form() {
     function handleChange(event) {
         const { name, value } = event.target;
         if (name === "job")
-            setPerson({ name: person["name"], job: value})
+            setPerson({ name: person["name"], job: value});
         else setPerson({ name: value, job: person["job"]});
     }
 
@@ -41,6 +41,5 @@ function Form() {
          </form>
     );
 }
-
 
 export default Form;
