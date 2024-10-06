@@ -31,8 +31,8 @@ const users = {
         name: "Dennis",
         job: "Bartender"
       }
-    ]
-  };
+  ]
+};
 
 app.use(express.json());
 
@@ -68,18 +68,39 @@ app.get("/users/:id", (req, res) => {
     } else {
         res.send(result);
     }
-    });
+  });
 
 const addUser = (user) => {
     users["users_list"].push(user);
     return user;
-    };
+  };
 
 app.post("/users", (req, res) => {
     const userToAdd = req.body;
     addUser(userToAdd);
     res.send();
-    });
+  });
+
+const delUserById = (id) => {
+  const user = findUserById(id);
+  if (!user) {
+    return undefined;
+  } else {
+    users["users_list"] = users["users_list"].filter((user) => user["id"] !== id); // filter out the user by id
+    return user; // return the deleted user
+  }
+};
+
+app.delete("/users/:id", (req, res) => {
+  const id = req.params["id"];
+  const result = delUserById(id);
+  if (result !== undefined){
+    res.status(200).json(result)
+  } else {
+    res.status(404).send("Resource not found.");
+  }
+});
+
 app.listen(port, () => {
   console.log(
     `Example app listening at http://localhost:${port}`
