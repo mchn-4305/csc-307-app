@@ -83,7 +83,12 @@ app.get("/users/:id", (req, res) => {
     }
   });
 
+const generateId =() => {
+  return Math.floor(Math.random() * 1000).toString();
+};
+
 const addUser = (user) => {
+    user.id = generateId();
     users["users_list"].push(user);
     return user;
   };
@@ -108,7 +113,7 @@ app.delete("/users/:id", (req, res) => {
   const id = req.params["id"];
   const result = delUserById(id);
   if (result !== undefined){
-    res.status(200).json(result)
+    res.status(204).json(result)
   } else {
     res.status(404).send("Resource not found.");
   }
