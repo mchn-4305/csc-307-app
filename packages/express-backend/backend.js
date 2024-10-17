@@ -44,13 +44,13 @@ app.get("/", (req, res) => {
 
 const findUserByName = (name) => {
     return users["users_list"].filter(
-      (user) => user["name"] === name
+      (user) => user["name"].toLowerCase() === name.toLowerCase()
     );
   };
 
 const findUserByJob = (job) => {
     return users["users_list"].filter(
-    (user) => user["job"] === job
+    (user) => user["job"].toLowerCase() === job.toLowerCase()
   );
 };
 
