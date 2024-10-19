@@ -140,22 +140,16 @@ app.post("/users", (req, res) => {
 app.delete("/users/:id", (req, res) => {
   const id = req.params.id;
 
-  userServices.findUserById(id)
+  userServices.deleteUserById(id)
     .then((result) => {
       if(!result) {
-        res.status(404).send("Resource not found")
+        res.status(404).send("User not found")
       } else {
-        userServices.findUserByIdAndDelete(id)
-        .then(() => {
-          res.status(204).send();
-        })
-        .catch((error) => {
-          res.status(500).send("Error deleting user");
-        });
+        res.status(204).send();
       }
     })
     .catch((error) => {
-      res.status(500).send("Error finding user");
+      res.status(500).send("Error deleting user");
     })
   // const result = delUserById(id);
   // if (result !== undefined){
