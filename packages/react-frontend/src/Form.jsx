@@ -24,7 +24,7 @@ function Form(props) {
             <label htmlFor="name">Name</label>
             <input
                 type="text"
-                nae="name"
+                name="name"
                 id="name"
                 value={person.name}
                 onChange={handleChange}
