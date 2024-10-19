@@ -60,8 +60,8 @@ app.get("/users", (req, res) => {
     const job = req.query.job;
 
     userServices.getUsers(name, job)
-      .then((res) => {
-        res.json({ users_list: res})
+      .then((users) => {
+        res.json({ users_list: users})
       })
       .catch((error) => {
         res.status(500).send("Error fetching users");
