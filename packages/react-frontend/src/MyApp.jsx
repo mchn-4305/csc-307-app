@@ -8,12 +8,12 @@ function MyApp() {
 
   function removeOneCharacter(index) {
     const userDel = characters[index];
-    const promise = fetch(`http://localhost:8000/users/${userDel.id}`, {
+    const promise = fetch(`http://localhost:8000/users/${userDel._id}`, {
       method: "DELETE",
     }).then((res) => {
       if ( res.status === 204) {
-        const updated = characters.filter((character, i) => {
-          return i !== index;
+        const updated = characters.filter((character) => {
+          return character._id !== userDel._id;
         })
         setCharacters(updated);
       } else {
@@ -25,7 +25,7 @@ function MyApp() {
 
   function updateList(person) {
     postUser(person)
-      .then(() => setCharacters([...characters,person]))
+      .then((newUser) => setCharacters([...characters,newUser]))
       .catch((error) => {
         console.log(error);
       })
