@@ -12,16 +12,17 @@ mongoose
   .catch((error) => console.log(error));
 
 function getUsers(name, job) {
-  let query = {};
-
-  if (name) {
-    query.name = name;
+  let promise;
+  if (name === undefined && job === undefined) {
+    promise = userModel.find();
+  } else if (name && !job) {
+    promise = findUserByName(name);
+  } else if (job && !name) {
+    promise = findUserByJob(job);
+  } else {
+    promise = findUserByNameAndJob(name, job);
   }
-  if (job) {
-    query.job = job;
-  }
-
-  return userModel.find(query);
+  return promise;
 }
 
 function findUserById(id) {
@@ -34,13 +35,17 @@ function addUser(user) {
   return promise;
 }
 
-// function findUserByName(name) {
-//   return userModel.find({ name: name });
-// }
+function findUserByName(name) {
+  return userModel.find({ name: name });
+}
 
-// function findUserByJob(job) {
-//   return userModel.find({ job: job });
-// }
+function findUserByJob(job) {
+  return userModel.find({ job: job });
+}
+
+function findUserByNameAndJob(name, job){
+  return userModel.find({ name : name, job : job});
+}
 
 function deleteUserById(id) {
     return userModel.findByIdAndDelete(id);

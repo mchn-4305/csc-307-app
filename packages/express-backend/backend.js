@@ -20,6 +20,7 @@ app.get("/users", (req, res) => {
     userServices.getUsers(name, job)
       .then((users) => {
         res.json({ users_list: users})
+        res.send();
       })
       .catch((error) => {
         res.status(500).send("Error fetching users");

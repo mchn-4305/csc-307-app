@@ -38,13 +38,19 @@ function MyApp() {
 
   useEffect(() => {
     fetchUsers()
-      .then((res) => res.json())
-      .then((json) => setCharacters(json["users_list"]))
-      .catch((error) => {console.log(error);});
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setCharacters(json["users_list"]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [] );
 
   function postUser(person) {
-    const promise = fetch("Http://localhost:8000/users", {
+    const promise = fetch("http://localhost:8000/users", {
       method: "POST",
       headers: {
         "Content-Type" : "application/json",
