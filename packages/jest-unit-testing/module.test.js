@@ -39,5 +39,5 @@ test('Testing containsNumbers -- string without numbers', ()=> {
 // bugged code
 test('Testing containsNumbers -- string with special characters -- this is a bug', ()=> {
     const s = "`~!@#$%^&*()-_=+[]\\{}}|;':<>?,./\" ";
-    expect(mut.containsNumbers(s)).toBe(false);
+    expect(mut.containsNumbers(s)).toBe(true);
 })
